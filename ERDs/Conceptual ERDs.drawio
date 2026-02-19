@@ -7,6 +7,9 @@
         <mxCell id="TuCpTPD3jY2u-f4SVACi-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontFamily=Verdana;fontSize=17;" value="Mustafa&#39;s Version of Conceptual ERD" vertex="1">
           <mxGeometry height="30" width="330" x="230" y="20" as="geometry" />
         </mxCell>
+        <mxCell id="cqI4YzAZXvk_WCNcCT3N-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="60" width="120" x="90" y="90" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
