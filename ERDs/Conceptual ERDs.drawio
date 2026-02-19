@@ -4,6 +4,9 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="TuCpTPD3jY2u-f4SVACi-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontFamily=Verdana;fontSize=17;" value="Mustafa&#39;s Version of Conceptual ERD" vertex="1">
+          <mxGeometry height="30" width="330" x="230" y="20" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
@@ -12,6 +15,9 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="lQ_ERUm_5pt9t4SpTz9K-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;font-family: Verdana; font-size: 17px;&quot;&gt;Reem&#39;s Version of Conceptual ERD&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="320" x="260" y="30" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
@@ -20,6 +26,9 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="RR8P90_LD4WDWBWXgoor-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;font-family: Verdana; font-size: 17px;&quot;&gt;Amr&#39;s Version of Conceptual ERD&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="360" x="245" y="30" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
