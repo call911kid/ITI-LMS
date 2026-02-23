@@ -1,7 +1,7 @@
 CREATE TABLE [IntakeTrack](
 	[IntakeTrackId] INT IDENTITY(1,1),
-	[IntakeId] INT,
-	[TrackId] INT,
+	[IntakeId] INT NOT NULL,
+	[TrackId] INT NOT NULL,
 
 	CONSTRAINT PK_IntakeTrack PRIMARY KEY([IntakeTrackId]),
 	CONSTRAINT FK_IntakeTrack_Intake FOREIGN KEY([IntakeId]) REFERENCES [Intake]([IntakeId]),
