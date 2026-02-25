@@ -1,17 +1,20 @@
-CREATE PROCEDURE USP_DeleteQuestion
+CREATE PROCEDURE usp_DeleteQuestion
     @InstructorId INT,
     @QuestionId INT
 AS
 BEGIN
-    --check
     IF EXISTS (
         SELECT 1 
-        FROM Questions q
-        JOIN Courses c ON q.CourseId = c.CourseId
+        FROM Question q
+        JOIN Class c ON q.CourseId = c.CourseId
         WHERE q.QuestionId = @QuestionId AND c.InstructorId = @InstructorId
     )
     BEGIN
-        DELETE FROM Questions WHERE QuestionId = @QuestionId;
+        DELETE FROM Choice
+        WHERE QuestionId = @QuestionId;
+
+        DELETE FROM Question
+        WHERE QuestionId = @QuestionId;
     END
     ELSE
     BEGIN
