@@ -18,6 +18,6 @@ RETURN
     INNER JOIN IntakeTrack it  ON e.IntakeTrackId = it.IntakeTrackId
     INNER JOIN Branch b        ON it.BranchId = b.BranchId
     INNER JOIN Track t         ON it.TrackId = t.TrackId
-    WHERE se.StudentId = dbo.GetCurrentUserStudentId()
+    WHERE se.StudentId = dbo.GetCurrentUserID()
       AND GETDATE() BETWEEN e.StartTime AND e.EndTime
 );
