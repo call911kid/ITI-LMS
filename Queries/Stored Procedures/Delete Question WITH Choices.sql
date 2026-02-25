@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_DeleteQuestion
+CREATE PROCEDURE USP_DeleteQuestion
     @InstructorId INT,
     @QuestionId INT
 AS
