@@ -1,0 +1,12 @@
+CREATE FUNCTION dbo.GetCurrentUserID()
+RETURNS INT
+AS
+BEGIN
+    DECLARE @CurrentUserID INT;
+
+    SELECT @CurrentUserID = PersonID
+    FROM Users
+    WHERE Username = SUSER_SNAME();
+
+    RETURN @CurrentUserID;
+END;
