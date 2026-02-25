@@ -1,9 +1,11 @@
+
 CREATE PROCEDURE USP_UpdateQuestion
-    @InstructorId INT,
     @QuestionId INT,
     @QuestionText NVARCHAR(MAX)
 AS
 BEGIN
+    DECLARE @InstructorId INT = dbo.GetCurrentUserID();
+
     IF EXISTS (
         SELECT 1 
         FROM Questions q
@@ -20,4 +22,4 @@ BEGIN
     BEGIN
         RAISERROR('Instructor not allowed to update this question.', 16, 1);
     END
-END
+END;
