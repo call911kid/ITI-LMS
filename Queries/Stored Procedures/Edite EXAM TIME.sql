@@ -1,26 +1,28 @@
 CREATE PROCEDURE USP_SetExamSchedule
     @ExamId INT,
-    @StartTime DATETIME,
-    @EndTime DATETIME
+    @StartTime DATETIME = NULL,
+    @EndTime DATETIME = NULL
 AS
 BEGIN
     DECLARE @InstructorId INT = dbo.GetCurrentUserID();
 
-    IF EXISTS (
+    -- Check if instructor can modify this exam
+    IF NOT EXISTS (
         SELECT 1
-        FROM Exams e
-        JOIN Courses c ON e.CourseId = c.CourseId
+        FROM Exam e
+        JOIN Class cl ON e.IntakeTrackId = cl.IntakeTrackId
         WHERE e.ExamId = @ExamId
-          AND c.InstructorId = @InstructorId
+          AND cl.InstructorId = @InstructorId
     )
     BEGIN
-        UPDATE Exams
-        SET StartTime = @StartTime,
-            EndTime = @EndTime
-        WHERE ExamId = @ExamId;
-    END
-    ELSE
-    BEGIN
         RAISERROR('Instructor not allowed to set schedule for this exam.', 16, 1);
+        RETURN;
     END
+
+    -- Update only the columns provided
+    UPDATE Exam
+    SET 
+        StartTime = COALESCE(@StartTime, StartTime),
+        EndTime   = COALESCE(@EndTime, EndTime)
+    WHERE ExamId = @ExamId;
 END;
