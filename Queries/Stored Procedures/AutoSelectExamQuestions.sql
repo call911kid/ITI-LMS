@@ -1,12 +1,16 @@
 CREATE PROCEDURE USP_AutoSelectExamQuestions
     @ExamId INT,
     @NumMCQ INT,
+    @MarksMCQ INT,
     @NumTF INT,
-    @NumText INT
+    @MarksTF INT,
+    @NumText INT,
+    @MarksText INT
 AS
 BEGIN
     DECLARE @InstructorId INT = dbo.GetCurrentUserID();
 
+    -- تحقق من صلاحية المدرس
     IF EXISTS (
         SELECT 1
         FROM Exam e
@@ -19,7 +23,7 @@ BEGIN
 
         -- MCQ
         INSERT INTO ExamQuestion (ExamId, QuestionId, Marks)
-        SELECT TOP (@NumMCQ) q.QuestionId, 0
+        SELECT TOP (@NumMCQ) q.QuestionId, @MarksMCQ
         FROM Question q
         WHERE q.QuestionType = 'MCQ'
           AND q.CourseId = @CourseId
@@ -27,7 +31,7 @@ BEGIN
 
         -- TF
         INSERT INTO ExamQuestion (ExamId, QuestionId, Marks)
-        SELECT TOP (@NumTF) q.QuestionId, 0
+        SELECT TOP (@NumTF) q.QuestionId, @MarksTF
         FROM Question q
         WHERE q.QuestionType = 'TF'
           AND q.CourseId = @CourseId
@@ -35,7 +39,7 @@ BEGIN
 
         -- Text
         INSERT INTO ExamQuestion (ExamId, QuestionId, Marks)
-        SELECT TOP (@NumText) q.QuestionId, 0
+        SELECT TOP (@NumText) q.QuestionId, @MarksText
         FROM Question q
         WHERE q.QuestionType = 'Text'
           AND q.CourseId = @CourseId
