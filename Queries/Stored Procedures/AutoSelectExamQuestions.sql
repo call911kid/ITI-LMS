@@ -9,34 +9,36 @@ BEGIN
 
     IF EXISTS (
         SELECT 1
-        FROM Exams e
-        JOIN Courses c ON e.CourseId = c.CourseId
+        FROM Exam e
+        JOIN Class cl ON e.IntakeTrackId = cl.IntakeTrackId
         WHERE e.ExamId = @ExamId
-          AND c.InstructorId = @InstructorId
+          AND cl.InstructorId = @InstructorId
     )
     BEGIN
+        DECLARE @CourseId INT = (SELECT CourseId FROM Exam WHERE ExamId = @ExamId);
+
         -- MCQ
-        INSERT INTO ExamQuestions (ExamId, QuestionId)
-        SELECT TOP (@NumMCQ) q.QuestionId
-        FROM Questions q
+        INSERT INTO ExamQuestion (ExamId, QuestionId, Marks)
+        SELECT TOP (@NumMCQ) q.QuestionId, 0
+        FROM Question q
         WHERE q.QuestionType = 'MCQ'
-          AND q.CourseId = (SELECT CourseId FROM Exams WHERE ExamId = @ExamId)
+          AND q.CourseId = @CourseId
         ORDER BY NEWID();
 
         -- TF
-        INSERT INTO ExamQuestions (ExamId, QuestionId)
-        SELECT TOP (@NumTF) q.QuestionId
-        FROM Questions q
+        INSERT INTO ExamQuestion (ExamId, QuestionId, Marks)
+        SELECT TOP (@NumTF) q.QuestionId, 0
+        FROM Question q
         WHERE q.QuestionType = 'TF'
-          AND q.CourseId = (SELECT CourseId FROM Exams WHERE ExamId = @ExamId)
+          AND q.CourseId = @CourseId
         ORDER BY NEWID();
 
         -- Text
-        INSERT INTO ExamQuestions (ExamId, QuestionId)
-        SELECT TOP (@NumText) q.QuestionId
-        FROM Questions q
+        INSERT INTO ExamQuestion (ExamId, QuestionId, Marks)
+        SELECT TOP (@NumText) q.QuestionId, 0
+        FROM Question q
         WHERE q.QuestionType = 'Text'
-          AND q.CourseId = (SELECT CourseId FROM Exams WHERE ExamId = @ExamId)
+          AND q.CourseId = @CourseId
         ORDER BY NEWID();
     END
     ELSE
