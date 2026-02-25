@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_GetInstructorStudents
+CREATE PROCEDURE USP_GetInstructorStudents
     @InstructorId INT
 AS
 BEGIN
