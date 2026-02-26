@@ -1,3 +1,5 @@
+-----Good logic... we need to create and test
+
 CREATE PROCEDURE USP_UpdateExamSchedule
     @ExamId INT,
     @StartTime DATETIME = NULL,
