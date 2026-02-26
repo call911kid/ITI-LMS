@@ -1,3 +1,4 @@
+-----Good logic...but it needs to be completely revised.
 CREATE PROCEDURE USP_SetCorrectAnswer
     @QuestionId INT,
     @ChoiceId INT
