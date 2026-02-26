@@ -1,4 +1,4 @@
-CREATE PROCEDURE USP_SetExamSchedule
+CREATE PROCEDURE USP_UpdateExamSchedule
     @ExamId INT,
     @StartTime DATETIME = NULL,
     @EndTime DATETIME = NULL
