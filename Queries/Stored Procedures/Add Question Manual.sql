@@ -1,4 +1,5 @@
-CREATE PROCEDURE USP_ManualSelectExamQuestion
+------Good logic...but it needs to be completely revised.
+CREATE PROCEDURE USP_AddQuestionManual
     @ExamId INT,
     @QuestionId INT,
     @Marks DECIMAL(5,2) 
