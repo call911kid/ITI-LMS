@@ -1,4 +1,4 @@
-
+-------Good logic... but the column names are missing and need a complete review, editing, and checking.
 CREATE PROCEDURE USP_UpdateQuestion
     @QuestionId INT,
     @QuestionText NVARCHAR(MAX)
