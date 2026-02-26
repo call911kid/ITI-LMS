@@ -1,3 +1,4 @@
+-----The role of the manger... presenting all students with the instructor they are teaching. .....need to check the column names.
 CREATE VIEW VW_InstructorStudents
 AS
 SELECT
