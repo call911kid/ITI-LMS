@@ -2,7 +2,7 @@ CREATE TABLE [Student](
 	[StudentId] INT IDENTITY(1,1),
 	[StudentName] NVARCHAR(100) NOT NULL,
 	[UserId] INT NOT NULL,
-	[IntakeTrackId] INT NOT NULL,
+	[IntakeTrackId] INT NULL, -- allow null so that students could be registred then assigned to a track and intake later
 
 	CONSTRAINT PK_Student PRIMARY KEY([StudentId]),
 	CONSTRAINT FK_Student_User FOREIGN KEY([UserId]) REFERENCES [User]([UserId]),
