@@ -12,7 +12,7 @@ CREATE TABLE [Exam](
 	CONSTRAINT FK_Exam_Course FOREIGN KEY([CourseId]) REFERENCES [Course]([CourseId]),
 	CONSTRAINT FK_Exam_IntakeTrack FOREIGN KEY([IntakeTrackId]) REFERENCES [IntakeTrack]([IntakeTrackId]),
 
-	CONSTRAINT CHK_Exam_Times CHECK([EndTime] > [StartTime])
-	CONSTRAINT [CHK_Exam_Type] CHECK ([ExamType] IN ('Exam', 'Corrective'))
+    CONSTRAINT CHK_Exam_Times CHECK([EndTime] > [StartTime]),
+    CONSTRAINT CHK_Exam_Type CHECK ([ExamType] IN ('Exam', 'Corrective'))
 
 )
