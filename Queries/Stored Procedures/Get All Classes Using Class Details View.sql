@@ -1,0 +1,6 @@
+CREATE PROCEDURE USP_GetAllClasses AS
+BEGIN
+	SELECT * FROM VW_ClassDetails
+END
+
+EXEC USP_GetAllClasses
