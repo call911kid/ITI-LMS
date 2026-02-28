@@ -1,20 +1,32 @@
 USE [master]
 GO
+
 CREATE DATABASE [ITI_LMS]
 CONTAINMENT = NONE
 ON  PRIMARY 
 (
-	NAME = N'ITI_LMS',
-	FILENAME = N'/var/opt/mssql/data/ITI_LMS.mdf' ,
-	SIZE = 8192KB ,
+	NAME = N'ITI_LMS_Primary',
+	FILENAME = N'/var/opt/mssql/data/ITI_LMS_Primary.mdf',
+	SIZE = 8192KB,
+	MAXSIZE = UNLIMITED,
+	FILEGROWTH = 65536KB
+),
+-- Adding a Secondary Filegroup
+FILEGROUP [ExamData]
+(
+	NAME = N'ITI_LMS_ExamData',
+	FILENAME = N'/var/opt/mssql/data/ITI_LMS_ExamData.ndf',
+	SIZE = 8192KB,
 	MAXSIZE = UNLIMITED,
 	FILEGROWTH = 65536KB
 )
 LOG ON 
 ( 
-	NAME = N'ITI_LMS_log', FILENAME = N'/var/opt/mssql/data/ITI_LMS_log.ldf' ,
-	SIZE = 8192KB ,
-	MAXSIZE = 2048GB ,
+	NAME = N'ITI_LMS_log', 
+	FILENAME = N'/var/opt/mssql/data/ITI_LMS_log.ldf',
+	SIZE = 8192KB,
+	MAXSIZE = 2048GB,
 	FILEGROWTH = 65536KB
 )
-WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF;
+GO
