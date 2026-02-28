@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[USP_LogAudit]
+CREATE PROCEDURE [dbo].[USP_LogIntoAudit]
 AS
 BEGIN
     INSERT INTO [dbo].[Audit] (

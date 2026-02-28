@@ -11,7 +11,7 @@ BEGIN
     END TRY
 
     BEGIN CATCH
-        EXEC [dbo].[USP_LogAudit];
+        EXEC [dbo].[USP_LogIntoAudit];
         THROW;
     END CATCH
 END
