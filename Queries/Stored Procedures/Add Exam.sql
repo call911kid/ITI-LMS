@@ -1,4 +1,4 @@
--- adds a new exam with instructor authorization check
+-- adds a new exam with instructor authorization check and making sure that a standard exam has been conducted before a corrective one is added
 
 CREATE PROCEDURE [dbo].[USP_AddExam]
 	@courseId INT,
@@ -18,6 +18,18 @@ BEGIN
 		)
 		BEGIN
 			RAISERROR('not authorized to create an exam for this class.', 16, 1);
+		END
+
+		IF @examType = 'Corrective'
+		BEGIN
+			IF NOT EXISTS (
+				SELECT 1 
+				FROM [dbo].[Exam]
+				WHERE [CourseId] = @courseId AND [IntakeTrackId] = @intakeTrackId AND [ExamType] = 'Exam'
+			)
+			BEGIN
+				RAISERROR('a corrective exam cannot be created because no standard exam was found for this course.', 16, 1);
+			END
 		END
 
 		INSERT INTO [dbo].[Exam] ([CourseId], [ExamType], [IntakeTrackId], [StartTime], [EndTime])
