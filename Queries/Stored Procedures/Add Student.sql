@@ -1,48 +1,46 @@
-CREATE PROCEDURE USP_AddStudent
-    @StudentName NVARCHAR(100),
-    @UserId INT,
+CREATE PROCEDURE [dbo].[USP_AddStudent]
+    @StudentName   NVARCHAR(100),
+    @Username      NVARCHAR(50),
+    @PlainPassword NVARCHAR(255),
     @IntakeTrackId INT = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    IF NOT EXISTS (SELECT 1 FROM [User] WHERE [UserId] = @UserId)
-    BEGIN
-        RAISERROR('UserId does not exist.', 16, 1);
-        RETURN;
-    END
+    BEGIN TRY
 
-    DECLARE @RoleCheck NVARCHAR(50);  
-    SELECT @RoleCheck = [Role] FROM [dbo].[User] WHERE [UserId] = @UserId;
+        IF @IntakeTrackId IS NOT NULL
+           AND NOT EXISTS (SELECT 1 FROM [dbo].[IntakeTrack] WHERE [IntakeTrackId] = @IntakeTrackId)
+        BEGIN
+            RAISERROR('IntakeTrackId does not exist.', 16, 1);
+            RETURN;
+        END
 
-    IF @RoleCheck != 'StudentRole' 
-    BEGIN
-        RAISERROR('This UserId is not a student.', 16, 1);
-        RETURN;
-    END
+        EXEC [dbo].[USP_AddUserAccount]
+            @Username      = @Username,
+            @PlainPassword = @PlainPassword,
+            @Role          = 'StudentRole';
 
-    IF EXISTS (SELECT 1 FROM [Student] WHERE [UserId] = @UserId)
-    BEGIN
-        RAISERROR('This UserId is already assigned to a student.', 16, 1);
-        RETURN;
-    END
+        DECLARE @UserId INT;
+        SELECT @UserId = [UserId] FROM [dbo].[User] WHERE [Username] = @Username;
 
-    IF @IntakeTrackId IS NOT NULL AND NOT EXISTS (SELECT 1 FROM [IntakeTrack] WHERE [IntakeTrackId] = @IntakeTrackId)
-    BEGIN
-        RAISERROR('IntakeTrackId does not exist.', 16, 1);
-        RETURN;
-    END
+        INSERT INTO [dbo].[Student] ([StudentName], [UserId], [IntakeTrackId])
+        VALUES (@StudentName, @UserId, @IntakeTrackId);
 
-    INSERT INTO [Student] ([StudentName], [UserId], [IntakeTrackId])
-    VALUES (@StudentName, @UserId, @IntakeTrackId);
+        SELECT SCOPE_IDENTITY() AS NewStudentId;
+        PRINT '[OK] Student registered: ' + @StudentName + ' | Username: ' + @Username;
 
-    SELECT SCOPE_IDENTITY() AS NewStudentId;
+    END TRY
+    BEGIN CATCH
+        RAISERROR('Failed to create account for this student.', 16, 1);
+    END CATCH
 END;
 
 
 
-EXEC USP_AddStudent @StudentName = 'sara', @UserId = 2;
-
-
-
-
+------------------------------------------
+EXEC [dbo].[USP_AddStudent]
+    @StudentName   = 'Sara Mohamed',
+    @Username      = 'Sara_Student',
+    @PlainPassword = 'Student@456',
+    @IntakeTrackId = 1;
