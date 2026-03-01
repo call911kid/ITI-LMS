@@ -1,37 +1,36 @@
-CREATE PROCEDURE USP_AddInstructor
+CREATE PROCEDURE [dbo].[USP_AddInstructor]
     @InstructorName NVARCHAR(50),
-    @UserId INT
+    @Username       NVARCHAR(50),
+    @PlainPassword  NVARCHAR(255)
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    IF NOT EXISTS (SELECT 1 FROM [User] WHERE [UserId] = @UserId)
-    BEGIN
-        RAISERROR('UserId does not exist.', 16, 1);
-        RETURN;
-    END
+    BEGIN TRY
 
-    DECLARE @RoleCheck NVARCHAR(50); 
-    SELECT @RoleCheck = [Role] FROM [dbo].[User] WHERE [UserId] = @UserId;
+        EXEC [dbo].[USP_AddUserAccount]
+            @Username      = @Username,
+            @PlainPassword = @PlainPassword,
+            @Role          = 'InstructorRole';
 
-    IF @RoleCheck != 'InstructorRole'  
-    BEGIN
-        RAISERROR('This UserId is not an instructor.', 16, 1);
-        RETURN;
-    END
+        DECLARE @UserId INT;
+        SELECT @UserId = [UserId] FROM [dbo].[User] WHERE [Username] = @Username;
 
-    IF EXISTS (SELECT 1 FROM [Instructor] WHERE [UserId] = @UserId)
-    BEGIN
-        RAISERROR('This UserId is already assigned to an instructor.', 16, 1);
-        RETURN;
-    END
+        INSERT INTO [dbo].[Instructor] ([InstructorName], [UserId])
+        VALUES (@InstructorName, @UserId);
 
-    INSERT INTO [Instructor] ([InstructorName], [UserId])
-    VALUES (@InstructorName, @UserId);
+        SELECT SCOPE_IDENTITY() AS NewInstructorId;
+        PRINT '[OK] Instructor registered: ' + @InstructorName + ' | Username: ' + @Username;
 
-    SELECT SCOPE_IDENTITY() AS NewInstructorId;
+    END TRY
+    BEGIN CATCH
+        RAISERROR('Failed to create account for this instructor.', 16, 1);
+    END CATCH
 END;
 
+------------------------------------------------------
 
-
-EXEC USP_AddInstructor @InstructorName = 'Ahmed', @UserId = 1;
+EXEC [dbo].[USP_AddInstructor]
+    @InstructorName = 'Ahmed Ali',
+    @Username       = 'Ahmed_Inst',
+    @PlainPassword  = 'Instructor@123';
