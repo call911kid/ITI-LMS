@@ -55,6 +55,11 @@ BEGIN
 END;
 GO
 
+-------------------------------------
+CREATE ROLE InstructorRole;
+CREATE ROLE StudentRole;
+CREATE ROLE TrainingManagerRole;
+-------------------------------------
 
 
 
