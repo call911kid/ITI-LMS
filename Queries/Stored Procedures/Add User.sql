@@ -1,9 +1,8 @@
 
 
-USE ExaminationSystemDB;
-GO
 
-CREATE PROCEDURE [dbo].[USP_CreateUserAccount]
+
+CREATE PROCEDURE [dbo].[USP_AddUserAccount]
     @Username      NVARCHAR(50),
     @PlainPassword NVARCHAR(255),
     @Role          NVARCHAR(50)
