@@ -1,0 +1,48 @@
+-- create trigger that prevent the CRUD operation with anyone has't permission to apply them
+CREATE TRIGGER TR_CheckPermission_Branch
+ON Branch
+INSTEAD OF INSERT, UPDATE, DELETE
+AS
+BEGIN
+	-- checking section of who has permission
+    DECLARE @UserId INT;
+
+    SET @UserId = CAST(SESSION_CONTEXT(N'UserId') AS INT);
+
+    IF NOT EXISTS (
+        SELECT 1
+        FROM [User]
+        WHERE UserId = @UserId AND Role IN ('AdminRole', 'InstructorRole')
+    )
+    BEGIN
+        RAISERROR('Access Denied: Only Admin or Instructor can modify Branch',16,1);
+        ROLLBACK;
+        RETURN;
+    END
+
+	-- if have permission then apply the CRUD operations
+
+    -- INSERT
+    IF EXISTS (SELECT * FROM inserted) AND NOT EXISTS (SELECT * FROM deleted)
+    BEGIN
+        INSERT INTO Branch (BranchName, BranchAddress)
+        SELECT BranchName, BranchAddress FROM inserted;
+    END
+
+    -- DELETE
+    IF EXISTS (SELECT * FROM deleted) AND NOT EXISTS (SELECT * FROM inserted)
+    BEGIN
+        DELETE FROM Branch
+        WHERE BranchId IN (SELECT BranchId FROM deleted);
+    END
+
+    -- UPDATE
+    IF EXISTS (SELECT * FROM inserted) AND EXISTS (SELECT * FROM deleted)
+    BEGIN
+        UPDATE Branch
+        SET BranchName = i.BranchName,
+            BranchAddress = i.BranchAddress
+        FROM Branch b
+        JOIN inserted i ON b.BranchId = i.BranchId;
+    END
+END
