@@ -1,7 +1,7 @@
 
 
 
-ALTER PROCEDURE [dbo].[USP_GetStudents]
+CREATE PROCEDURE [dbo].[USP_GetStudents]
     @StudentId INT = NULL
 AS
 BEGIN
