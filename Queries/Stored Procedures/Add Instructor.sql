@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[USP_AddInstructor]
+CREATE OR ALTER PROCEDURE [dbo].[USP_AddInstructor]
     @InstructorName NVARCHAR(50),
     @Username       NVARCHAR(50),
     @PlainPassword  NVARCHAR(255)
@@ -24,7 +24,8 @@ BEGIN
 
     END TRY
     BEGIN CATCH
-        RAISERROR('Failed to create account for this instructor.', 16, 1);
+	    EXEC [dbo].[USP_LogIntoAudit];
+        THROW;
     END CATCH
 END;
 

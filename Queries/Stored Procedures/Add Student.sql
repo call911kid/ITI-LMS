@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[USP_AddStudent]
+CREATE OR ALTER PROCEDURE [dbo].[USP_AddStudent]
     @StudentName   NVARCHAR(100),
     @Username      NVARCHAR(50),
     @PlainPassword NVARCHAR(255),
@@ -32,7 +32,8 @@ BEGIN
 
     END TRY
     BEGIN CATCH
-        RAISERROR('Failed to create account for this student.', 16, 1);
+		EXEC [dbo].[USP_LogIntoAudit];
+        THROW;
     END CATCH
 END;
 

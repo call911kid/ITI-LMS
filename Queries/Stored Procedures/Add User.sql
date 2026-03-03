@@ -63,20 +63,20 @@ CREATE ROLE TrainingManagerRole;
 
 
 
- EXEC [dbo].[USP_CreateUserAccount]
+ EXEC [dbo].[USP_AddUserAccount]
       @Username      = 'Ahmed_Inst',
       @PlainPassword = 'Instructor@123',
       @Role          = 'InstructorRole';
 
 
 
- EXEC [dbo].[USP_CreateUserAccount]
+ EXEC [dbo].[USP_AddUserAccount]
       @Username      = 'Sara_Student',
       @PlainPassword = 'Student@456',
       @Role          = 'StudentRole';
 
 
- EXEC [dbo].[USP_CreateUserAccount]
+ EXEC [dbo].[USP_AddUserAccount]
       @Username      = 'Mohamed_TM',
       @PlainPassword = 'Manager@789',
       @Role          = 'TrainingManagerRole';
