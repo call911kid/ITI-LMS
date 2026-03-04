@@ -41,4 +41,5 @@ A database system designed to manage academic structure, users, courses, exams, 
 ## Core Entities
 
 **User**
+
 Stores system login information
