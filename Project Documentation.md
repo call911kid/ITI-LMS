@@ -15,7 +15,15 @@ Exams: Creation, Assignment, Student Attempts, Grading
 
 Reporting and Audit Logs
 
+**Key Features:**
 
+Multi-branch support
+
+Role-based access
+
+Automatic exam grading
+
+Business logic enforcement via stored procedures and triggers
 
 ## System Architecture
 
