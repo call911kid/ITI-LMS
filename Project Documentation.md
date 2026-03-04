@@ -4,7 +4,7 @@
 ## Description
 A database system designed to manage academic structure, users, courses, exams, and grading 
 
-The system supports:
+**The system supports:**
 
 -Multi-branch structure
 
