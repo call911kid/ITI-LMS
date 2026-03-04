@@ -72,23 +72,23 @@ Represents course details and relations
 
 **Instructor**
 
-Contains Instructor data and linked to User table.
+Contains Instructor data and linked to User table
 
-**Instructor**
+**Student**
 
-Contains Instructor data and linked to User table.
+Contains Student data and linked to User table
 
-9️⃣ Exam
+**Exam**
 
-Represents exam for a course.
+Represents exam for a course
 
-🔟 Question
+**Question**
 
-Stores question data.
+Stores question data
 
-11️⃣ Choice
+**Choice**
 
-Stores MCQ choices.
+Stores questions choices
 
 12️⃣ StudentExam
 
