@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[USP_DeleteStudent]
+CREATE OR ALTER PROCEDURE [dbo].[USP_DeleteStudent]
     @StudentId INT
 AS
 BEGIN
@@ -13,29 +13,32 @@ BEGIN
         DECLARE @Username NVARCHAR(50);
         DECLARE @UserId   INT;
 
-        SELECT 
+        SELECT
             @Username = U.[Username],
             @UserId   = U.[UserId]
         FROM [dbo].[User] U
         INNER JOIN [dbo].[Student] S ON S.[UserId] = U.[UserId]
         WHERE S.[StudentId] = @StudentId;
 
-
         DELETE SA
         FROM [dbo].[StudentAnswer] SA
         INNER JOIN [dbo].[StudentExam] SE ON SA.[StudentExamId] = SE.[StudentExamId]
         WHERE SE.[StudentId] = @StudentId;
 
-     
         DELETE FROM [dbo].[StudentExam] WHERE [StudentId] = @StudentId;
 
-     
         DELETE FROM [dbo].[Student] WHERE [StudentId] = @StudentId;
-
 
         DELETE FROM [dbo].[User] WHERE [UserId] = @UserId;
 
         DECLARE @SQL NVARCHAR(500);
+
+        -- *** FIX: شيله من الـ Role الأول قبل DROP USER ***
+        IF EXISTS (SELECT 1 FROM sys.database_principals WHERE name = @Username)
+        BEGIN
+            SET @SQL = 'ALTER ROLE [StudentRole] DROP MEMBER [' + @Username + '];';
+            EXEC sp_executesql @SQL;
+        END
 
         IF EXISTS (SELECT 1 FROM sys.database_principals WHERE name = @Username)
         BEGIN
