@@ -15,9 +15,7 @@ It manages:
 
 **Reporting and Audit Logs**
 
-
-
-**Key Features:**
+### Key Features:
 
 Multi-branch support
 
