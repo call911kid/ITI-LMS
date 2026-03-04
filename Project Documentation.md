@@ -1,8 +1,8 @@
 ## Project Title:
-	Examination System Database.
+ITI Learning Management System (LMS)
 
 ## Description
-This database powers a comprehensive Learning Management System for ITI branches.
+This database powers a comprehensive Learning Management System for ITI branches
 It manages:
 
 **Academic structure:** Branches, Departments, Tracks, Intakes
