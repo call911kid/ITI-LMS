@@ -36,3 +36,9 @@ A database system designed to manage academic structure, users, courses, exams, 
 -Triggers
 
 -Audit Logging
+
+
+## Core Entities
+
+**User**
+Stores system login information
