@@ -2,22 +2,28 @@
 	Examination System Database.
 
 ## Description
-A database system designed to manage academic structure, users, courses, exams, and grading 
+This database powers a comprehensive Learning Management System for ITI branches.
+It manages:
 
-**The system supports:**
+**Academic structure:** Branches, Departments, Tracks, Intakes
 
--Multi-branch structure
+**Users:** Admins, Instructors, Students
 
--Departments and Tracks
+**Courses:** Assignment, Enrollment
 
--Student and Instructor management
+**Exams:** Creation, Assignment, Student Attempts, Grading
 
--Course assignment
+**Reporting and Audit Logs**
 
--Online Exams
+### Key Features:
 
--Automatic grading
+Multi-branch support
 
+Role-based access
+
+Automatic exam grading
+
+Business logic enforcement via stored procedures and triggers
 
 ## System Architecture
 
@@ -55,3 +61,116 @@ Departments belongs to Branchs
 **Track**
 
 Tracks belongs to Departments
+
+**Intake**
+
+Represents a batch 
+
+**Course**
+
+Represents course details and relations
+
+**Instructor**
+
+Contains Instructor data and linked to User table
+
+**Student**
+
+Contains Student data and linked to User table
+
+**Exam**
+
+Represents exam for a course
+
+**Question**
+
+Stores question data
+
+**Choice**
+
+Stores questions choices
+
+**StudentExam**
+
+Stores student exam attempt
+
+**StudentAnswer**
+
+Stores student answers
+
+## Relationships
+
+### One-to-Many
+
+Branch - Departments
+
+Department - Tracks
+
+Course - Exams
+
+Question - Choices
+
+### Many-to-Many
+
+Student - Course
+
+Instructor - Course
+
+Exam - Question
+
+
+## Business Logic Layer
+
+**The system uses:**
+
+### Stored Procedures
+
+**Grouped into:**
+
+Add
+
+Update
+
+Delete
+
+Get
+
+Exam Management
+
+### All insert/update operations are done via stored procedures to ensure:
+
+Data validation
+
+Security
+
+Transaction safety
+
+### Functions
+
+**Used for:**
+
+Validation checks
+
+Counting
+
+Returning computed data
+
+### Views
+
+**Used for:**
+
+Reporting
+
+Simplifying complex joins
+
+### Triggers
+
+**Used to:**
+
+Prevent duplicate data
+
+Enforce business rules
+
+Validate exam timing
+
+Maintain audit logs
