@@ -19,7 +19,7 @@ A database system designed to manage academic structure, users, courses, exams, 
 -Automatic grading
 
 
-##System Architecture
+## System Architecture
 
 **The system is using:**
 
