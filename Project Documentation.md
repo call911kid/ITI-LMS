@@ -174,3 +174,17 @@ Enforce business rules
 Validate exam timing
 
 Maintain audit logs
+
+## Exam Flow
+
+Instructor creates exam
+
+Questions are assigned
+
+Student starts exam
+
+Answers stored in StudentAnswer
+
+Score calculated automatically
+
+Result stored in StudentExam
