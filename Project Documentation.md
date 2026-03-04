@@ -188,3 +188,9 @@ Answers stored in StudentAnswer
 Score calculated automatically
 
 Result stored in StudentExam
+
+##Security
+
+Role-based access
+
+Permission validation using trigger
