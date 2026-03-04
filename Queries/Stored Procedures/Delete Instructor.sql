@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[USP_DeleteInstructor]
+CREATE OR ALTER PROCEDURE [dbo].[USP_DeleteInstructor]
     @InstructorId INT
 AS
 BEGIN
@@ -19,7 +19,7 @@ BEGIN
         DECLARE @Username NVARCHAR(50);
         DECLARE @UserId   INT;
 
-        SELECT 
+        SELECT
             @Username = U.[Username],
             @UserId   = U.[UserId]
         FROM [dbo].[User] U
@@ -31,6 +31,13 @@ BEGIN
         DELETE FROM [dbo].[User] WHERE [UserId] = @UserId;
 
         DECLARE @SQL NVARCHAR(500);
+
+        -- *** FIX: شيله من الـ Role الأول قبل DROP USER ***
+        IF EXISTS (SELECT 1 FROM sys.database_principals WHERE name = @Username)
+        BEGIN
+            SET @SQL = 'ALTER ROLE [InstructorRole] DROP MEMBER [' + @Username + '];';
+            EXEC sp_executesql @SQL;
+        END
 
         IF EXISTS (SELECT 1 FROM sys.database_principals WHERE name = @Username)
         BEGIN
