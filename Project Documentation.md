@@ -96,7 +96,152 @@ Stores student exam attempt
 
 **StudentAnswer**
 
-Stores student answers
+Stores student answers:
+
+## Functions 
+
+This folder contains **SQL Functions** that return a single value.
+
+* **Check Question Exists.sql**
+  Returns:
+
+  * `1` if the question exists
+  * `0` if the question does not exist
+
+* **Count Choices Number.sql**
+  Returns the number of choices for a specific question.
+
+* **Get Current Instructor Id.sql**
+  Returns the `InstructorId` based on the current `UserId`.
+
+* **Get Current Student Id.sql**
+  Returns the `StudentId` based on the current `UserId`.
+
+* **Get Exam Paper For Student.sql**
+  Returns the exam paper for a student, including:
+
+  * Exam questions
+  * Corresponding choices
+
+* **Get Track Count Per Department.sql**
+  Returns the total number of tracks within a specific department.
+
+
+## Stored Procedures 
+
+This is the **core part of the LMS project**, divided into several categories:
+
+### Add Procedures
+
+Handles insertion of new records. Most procedures include:
+
+* **Validation**
+* **TRY/CATCH blocks**
+
+Examples:
+
+* Add User
+* Add Student
+* Add Instructor
+* Add Course
+* Add Exam
+* Add Question
+* Add Choice
+* Add Track
+* Add Intake
+* Add Branch
+
+### Delete Procedures
+
+Handles deletion of records safely. Includes:
+
+* Foreign Key checks
+* Prevention of cascade errors
+
+Examples:
+
+* Delete Student
+* Delete Instructor
+* Delete Exam
+* Delete Track
+* Delete Branch
+
+### Update Procedures
+
+Handles updating existing records. Examples:
+
+* Update Branch
+* Update Course
+* Update Track
+* Update Intake
+* Update Exam
+
+### Exam Procedures
+
+Handles **exam-specific logic**, including:
+
+* Adding random questions to exams
+* Submitting student answers
+* Updating answers
+* Grading exams
+
+### Get Procedures
+
+Handles **data retrieval** using `SELECT` statements, often with `JOINs` and Views. Examples:
+
+* Get All Students
+* Get All Instructors
+* Get All Classes
+* Get Choices By Question
+* Get Question With Choices
+
+
+
+## Views 
+
+Views are used to **simplify complex queries**. Examples:
+
+* **All Questions With Choices**
+  Joins `Question` and `Choice` tables to display questions with their corresponding choices.
+
+* **Class Details**
+  Joins `Class`, `Course`, `Instructor`, and `Track` tables to show detailed class information.
+
+* **Classes Per Instructor**
+  Retrieves all classes taught by a specific instructor.
+
+* **Department Tracks Details**
+  Retrieves department information along with all associated tracks.
+
+
+
+## Triggers 
+
+This folder contains **advanced triggers** for enforcing business rules.
+
+* **Trigger Check Exam Time**
+  Ensures that students cannot take an exam outside the allowed time.
+
+* **Trigger Prevent Duplicate Choice**
+  Prevents the creation of duplicate choices with the same text for a question.
+
+* **Trigger Prevent Duplicate Class**
+  Prevents inserting duplicate classes with identical data.
+
+* **Trigger Check Permission Branch**
+  Ensures the user has the correct permissions for a specific branch.
+
+
+
+## Migration to AWS
+
+This folder contains scripts for **preparing the LMS database for deployment on AWS**.
+
+* **Create Database.sql** – Creates the LMS database.
+* **Table Creation.sql** – Creates all required tables.
+* **Drop Tables.sql** – Drops tables if needed (used for reseeding).
+* **Reseeding Data.sql** – Inserts initial or sample data for testing or deployment.
+
 
 ## Relationships
 
