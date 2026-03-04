@@ -5,15 +5,17 @@
 This database powers a comprehensive Learning Management System for ITI branches.
 It manages:
 
-Academic structure: Branches, Departments, Tracks, Intakes
+**Academic structure:** Branches, Departments, Tracks, Intakes
 
-Users: Admins, Instructors, Students
+**Users:** Admins, Instructors, Students
 
-Courses: Assignment, Enrollment
+**Courses:** Assignment, Enrollment
 
-Exams: Creation, Assignment, Student Attempts, Grading
+**Exams:** Creation, Assignment, Student Attempts, Grading
 
-Reporting and Audit Logs
+**Reporting and Audit Logs**
+
+
 
 **Key Features:**
 
