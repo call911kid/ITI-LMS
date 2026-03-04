@@ -90,10 +90,10 @@ Stores question data
 
 Stores questions choices
 
-12️⃣ StudentExam
+**StudentExam**
 
-Stores student exam attempt.
+Stores student exam attempt
 
-13️⃣ StudentAnswer
+**StudentAnswer**
 
-Stores student answer
+Stores student answers
