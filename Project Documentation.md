@@ -47,3 +47,11 @@ Stores system login information
 **Branch**
 
 Represents branchs 
+
+**Department**
+
+Departments belongs to Branchs
+
+**Track**
+
+Tracks belongs to Departments
