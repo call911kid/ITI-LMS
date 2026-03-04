@@ -155,17 +155,17 @@ Counting
 
 Returning computed data
 
-Views
+### Views
 
-Used for:
+**Used for:**
 
 Reporting
 
 Simplifying complex joins
 
-Triggers
+### Triggers
 
-Used to:
+**Used to:**
 
 Prevent duplicate data
 
