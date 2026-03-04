@@ -119,3 +119,58 @@ Instructor - Course
 Exam - Question
 
 
+## Business Logic Layer
+
+**The system uses:**
+
+### Stored Procedures
+
+**Grouped into:**
+
+Add
+
+Update
+
+Delete
+
+Get
+
+Exam Management
+
+### All insert/update operations are done via stored procedures to ensure:
+
+Data validation
+
+Security
+
+Transaction safety
+
+### Functions
+
+**Used for:**
+
+Validation checks
+
+Counting
+
+Returning computed data
+
+Views
+
+Used for:
+
+Reporting
+
+Simplifying complex joins
+
+Triggers
+
+Used to:
+
+Prevent duplicate data
+
+Enforce business rules
+
+Validate exam timing
+
+Maintain audit logs
