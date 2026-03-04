@@ -43,3 +43,7 @@ A database system designed to manage academic structure, users, courses, exams, 
 **User**
 
 Stores system login information
+
+**Branch**
+
+Represents branchs 
