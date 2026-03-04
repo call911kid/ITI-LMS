@@ -33,7 +33,6 @@ BEGIN
 
         DECLARE @SQL NVARCHAR(500);
 
-        -- *** FIX: شيله من الـ Role الأول قبل DROP USER ***
         IF EXISTS (SELECT 1 FROM sys.database_principals WHERE name = @Username)
         BEGIN
             SET @SQL = 'ALTER ROLE [StudentRole] DROP MEMBER [' + @Username + '];';
