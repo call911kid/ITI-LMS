@@ -17,3 +17,22 @@ A database system designed to manage academic structure, users, courses, exams, 
 -Online Exams
 
 -Automatic grading
+
+
+##System Architecture
+
+**The system is using:**
+
+-Microsoft SQL Server
+
+-Tables
+
+-Stored Procedures
+
+-Functions
+
+-Views
+
+-Triggers
+
+-Audit Logging
