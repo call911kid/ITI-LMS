@@ -2,21 +2,19 @@
 	Examination System Database.
 
 ## Description
-A database system designed to manage academic structure, users, courses, exams, and grading 
+This database powers a comprehensive Learning Management System for ITI branches.
+It manages:
 
-**The system supports:**
+Academic structure: Branches, Departments, Tracks, Intakes
 
--Multi-branch structure
+Users: Admins, Instructors, Students
 
--Departments and Tracks
+Courses: Assignment, Enrollment
 
--Student and Instructor management
+Exams: Creation, Assignment, Student Attempts, Grading
 
--Course assignment
+Reporting and Audit Logs
 
--Online Exams
-
--Automatic grading
 
 
 ## System Architecture
@@ -55,3 +53,11 @@ Departments belongs to Branchs
 **Track**
 
 Tracks belongs to Departments
+
+**Intake**
+
+Represents a batch of stu
+
+6️⃣ Course
+
+Represents subject taugh
