@@ -97,3 +97,25 @@ Stores student exam attempt
 **StudentAnswer**
 
 Stores student answers
+
+## Relationships
+
+### One-to-Many
+
+Branch - Departments
+
+Department - Tracks
+
+Course - Exams
+
+Question - Choices
+
+### Many-to-Many
+
+Student - Course
+
+Instructor - Course
+
+Exam - Question
+
+
