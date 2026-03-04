@@ -189,8 +189,20 @@ Score calculated automatically
 
 Result stored in StudentExam
 
-##Security
+## Security
 
 Role-based access
 
 Permission validation using trigger
+
+## Advanced Features
+
+Random question generation
+
+Auto grading
+
+Audit logging
+
+Prevent duplicate entries
+
+Constraint validatio
