@@ -64,8 +64,8 @@ Tracks belongs to Departments
 
 **Intake**
 
-Represents a batch of stu
+Represents a batch 
 
-6️⃣ Course
+**Course**
 
-Represents subject taugh
+Represents course details and relations
