@@ -69,3 +69,31 @@ Represents a batch
 **Course**
 
 Represents course details and relations
+
+**Instructor**
+
+Contains Instructor data and linked to User table.
+
+**Instructor**
+
+Contains Instructor data and linked to User table.
+
+9️⃣ Exam
+
+Represents exam for a course.
+
+🔟 Question
+
+Stores question data.
+
+11️⃣ Choice
+
+Stores MCQ choices.
+
+12️⃣ StudentExam
+
+Stores student exam attempt.
+
+13️⃣ StudentAnswer
+
+Stores student answer
