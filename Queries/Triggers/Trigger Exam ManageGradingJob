@@ -1,11 +1,4 @@
-USE [ITI_LMS]
-GO
 
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 
 CREATE OR ALTER TRIGGER [dbo].[TRG_Exam_ManageGradingJob]
 ON [dbo].[Exam]
