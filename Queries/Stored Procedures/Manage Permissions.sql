@@ -1,6 +1,6 @@
-CREATE PROCEDURE [dbo].[USP_ManagePermissions]
+CREATE or ALTER PROCEDURE [dbo].[USP_ManagePermissions]
     @Action      NVARCHAR(10),      -- 'GRANT', 'DENY', or 'REVOKE'
-    @Permission  NVARCHAR(50),      -- 'SELECT', 'INSERT', 'UPDATE', 'DELETE', 'EXECUTE'
+    @Permission  NVARCHAR(50),      -- 'SELECT', 'INSERT', 'UPDATE', 'DELETE', 'EXECUTE','ALTER','CONTROL','VIEW DEFINITION
     @ObjectName  NVARCHAR(100),     -- Table / View / Procedure
     @Username    NVARCHAR(50) = NULL,  
     @RoleName    NVARCHAR(50) = NULL   
@@ -15,7 +15,7 @@ BEGIN
     END
 
 
-    IF @Permission NOT IN ('SELECT', 'INSERT', 'UPDATE', 'DELETE', 'EXECUTE')
+   IF @Permission NOT IN ('SELECT','INSERT','UPDATE','DELETE','EXECUTE','ALTER','CONTROL','VIEW DEFINITION')
     BEGIN
         RAISERROR('Permission must be SELECT, INSERT, UPDATE, DELETE, or EXECUTE.', 16, 1);
         RETURN;
