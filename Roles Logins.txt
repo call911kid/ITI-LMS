@@ -1,0 +1,4 @@
+MustafaAdmin:Mustafa@2026SQL
+MohamedAhmed_Instructor:Instructor@123
+MohamedOmar_Student:Student@123
+Ali_Manager:Manager@123
