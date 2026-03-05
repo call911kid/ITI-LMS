@@ -17,11 +17,11 @@ It manages:
 
 ### Key Features:
 
-Multi-branch support
+* Multi-branch support
 
-Role-based access
+* Role-based access
 
-Automatic exam grading
+* Automatic exam grading
 
 Business logic enforcement via stored procedures and triggers
 
@@ -29,19 +29,19 @@ Business logic enforcement via stored procedures and triggers
 
 **The system is using:**
 
--Microsoft SQL Server
+* Microsoft SQL Server
 
--Tables
+* Tables
 
--Stored Procedures
+* Stored Procedures
 
--Functions
+* Functions
 
--Views
+* Views
 
--Triggers
+* Triggers
 
--Audit Logging
+* Audit Logging
 
 
 ## Core Entities
@@ -247,21 +247,21 @@ This folder contains scripts for **preparing the LMS database for deployment on 
 
 ### One-to-Many
 
-Branch - Departments
+* Branch - Departments
 
-Department - Tracks
+* Department - Tracks
 
-Course - Exams
+* Course - Exams
 
-Question - Choices
+* Question - Choices
 
 ### Many-to-Many
 
-Student - Course
+* Student - Course
 
-Instructor - Course
+* Instructor - Course
 
-Exam - Question
+* Exam - Question
 
 
 ## Business Logic Layer
@@ -272,82 +272,82 @@ Exam - Question
 
 **Grouped into:**
 
-Add
+* Add
 
-Update
+* Update
 
-Delete
+* Delete
 
-Get
+* Get
 
-Exam Management
+* Exam Management
 
 ### All insert/update operations are done via stored procedures to ensure:
 
-Data validation
+* Data validation
 
-Security
+* Security
 
-Transaction safety
+* Transaction safety
 
 ### Functions
 
 **Used for:**
 
-Validation checks
+* Validation checks
 
-Counting
+* Counting
 
-Returning computed data
+* Returning computed data
 
 ### Views
 
 **Used for:**
 
-Reporting
+* Reporting
 
-Simplifying complex joins
+* Simplifying complex joins
 
 ### Triggers
 
 **Used to:**
 
-Prevent duplicate data
+* Prevent duplicate data
 
-Enforce business rules
+* Enforce business rules
 
-Validate exam timing
+* Validate exam timing
 
-Maintain audit logs
+* Maintain audit logs
 
 ## Exam Flow
 
-Instructor creates exam
+* Instructor creates exam
 
-Questions are assigned
+* Questions are assigned
 
-Student starts exam
+* Student starts exam
 
-Answers stored in StudentAnswer
+* Answers stored in StudentAnswer
 
-Score calculated automatically
+* Score calculated automatically
 
-Result stored in StudentExam
+* Result stored in StudentExam
 
 ## Security
 
-Role-based access
+* Role-based access
 
-Permission validation using trigger
+* Permission validation using trigger
 
 ## Advanced Features
 
-Random question generation
+* Random question generation
 
-Auto grading
+* Auto grading
 
-Audit logging
+* Audit logging
 
-Prevent duplicate entries
+* Prevent duplicate entries
 
-Constraint validatio
+* Constraint validatio
