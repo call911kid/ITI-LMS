@@ -1,0 +1,216 @@
+USE [ITI_LMS]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE OR ALTER TRIGGER [dbo].[TRG_Exam_ManageGradingJob]
+ON [dbo].[Exam]
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE
+        @ExamId        INT,
+        @EndTime       DATETIME,
+        @JobName       NVARCHAR(200),
+        @ScheduleName  NVARCHAR(200),
+        @StepCommand   NVARCHAR(MAX),
+        @StartTime_Int INT,
+        @StartDate_Int INT;
+
+    --  INSERT
+    IF EXISTS (SELECT 1 FROM inserted) AND NOT EXISTS (SELECT 1 FROM deleted)
+    BEGIN
+        DECLARE ins_cursor CURSOR LOCAL FAST_FORWARD
+        FOR SELECT [ExamId], [EndTime] FROM inserted;
+
+        OPEN ins_cursor;
+        FETCH NEXT FROM ins_cursor INTO @ExamId, @EndTime;
+
+        WHILE @@FETCH_STATUS = 0
+        BEGIN
+            IF @EndTime <= GETDATE()
+            BEGIN
+                FETCH NEXT FROM ins_cursor INTO @ExamId, @EndTime;
+                CONTINUE;
+            END
+
+            SET @JobName      = 'AutoGrade_Exam_' + CAST(@ExamId AS NVARCHAR(20));
+            SET @ScheduleName = 'Schedule_AutoGrade_Exam_' + CAST(@ExamId AS NVARCHAR(20));
+
+            SET @StepCommand =
+                'EXEC [ITI_LMS].[dbo].[USP_AutoGradeExam] @ExamId = '
+                + CAST(@ExamId AS NVARCHAR(20)) + ';';
+
+            SET @StartTime_Int =
+                  DATEPART(HOUR,   @EndTime) * 10000
+                + DATEPART(MINUTE, @EndTime) * 100
+                + DATEPART(SECOND, @EndTime);
+
+            SET @StartDate_Int =
+                  YEAR(@EndTime)  * 10000
+                + MONTH(@EndTime) * 100
+                + DAY(@EndTime);
+
+            BEGIN TRY
+                EXEC msdb.dbo.sp_add_job
+                    @job_name     = @JobName,
+                    @enabled      = 1,
+                    @description  = N'Auto-grade exam and self-delete after execution.',
+                    @delete_level = 3;
+
+                EXEC msdb.dbo.sp_add_jobstep
+                    @job_name          = @JobName,
+                    @step_name         = N'Grade Exam',
+                    @subsystem         = N'TSQL',
+                    @database_name     = N'ITI_LMS',
+                    @command           = @StepCommand,
+                    @on_success_action = 1,
+                    @on_fail_action    = 2;
+
+                EXEC msdb.dbo.sp_add_schedule
+                    @schedule_name        = @ScheduleName,
+                    @freq_type            = 1,
+                    @freq_interval        = 0,
+                    @freq_subday_type     = 0,
+                    @freq_subday_interval = 0,
+                    @active_start_date    = @StartDate_Int,
+                    @active_start_time    = @StartTime_Int;
+
+                EXEC msdb.dbo.sp_attach_schedule
+                    @job_name      = @JobName,
+                    @schedule_name = @ScheduleName;
+
+                EXEC msdb.dbo.sp_add_jobserver
+                    @job_name = @JobName;
+            END TRY
+            BEGIN CATCH
+                EXEC [dbo].[USP_LogIntoAudit];
+            END CATCH
+
+            FETCH NEXT FROM ins_cursor INTO @ExamId, @EndTime;
+        END
+
+        CLOSE ins_cursor;
+        DEALLOCATE ins_cursor;
+    END
+
+    --  UPDATE:
+    ELSE IF EXISTS (SELECT 1 FROM inserted) AND EXISTS (SELECT 1 FROM deleted)
+    BEGIN
+        -- *** FIX 2: EXISTS check قبل فتح الـ cursor عشان ما نفتحش cursor فاضي ***
+        IF EXISTS (
+            SELECT 1
+            FROM inserted i
+            JOIN deleted  d ON i.[ExamId] = d.[ExamId]
+            WHERE i.[EndTime] <> d.[EndTime]
+        )
+        BEGIN
+            DECLARE upd_cursor CURSOR LOCAL FAST_FORWARD
+            FOR
+                SELECT i.[ExamId], i.[EndTime]
+                FROM inserted i
+                JOIN deleted  d ON i.[ExamId] = d.[ExamId]
+                WHERE i.[EndTime] <> d.[EndTime];
+
+            OPEN upd_cursor;
+            FETCH NEXT FROM upd_cursor INTO @ExamId, @EndTime;
+
+            WHILE @@FETCH_STATUS = 0
+            BEGIN
+                SET @JobName      = 'AutoGrade_Exam_' + CAST(@ExamId AS NVARCHAR(20));
+                SET @ScheduleName = 'Schedule_AutoGrade_Exam_' + CAST(@ExamId AS NVARCHAR(20));
+
+                BEGIN TRY
+                    IF @EndTime <= GETDATE()
+                    BEGIN
+                        IF EXISTS (
+                            SELECT 1 FROM msdb.dbo.sysjobs
+                            WHERE [name] = @JobName
+                        )
+                        BEGIN
+                            EXEC msdb.dbo.sp_delete_job
+                                @job_name = @JobName;
+                        END
+                    END
+                    ELSE
+                    BEGIN
+                        IF EXISTS (
+                            SELECT 1 FROM msdb.dbo.sysschedules
+                            WHERE [name] = @ScheduleName
+                        )
+                        BEGIN
+                            SET @StartTime_Int =
+                                  DATEPART(HOUR,   @EndTime) * 10000
+                                + DATEPART(MINUTE, @EndTime) * 100
+                                + DATEPART(SECOND, @EndTime);
+
+                            SET @StartDate_Int =
+                                  YEAR(@EndTime)  * 10000
+                                + MONTH(@EndTime) * 100
+                                + DAY(@EndTime);
+
+                            EXEC msdb.dbo.sp_update_schedule
+                                @name                 = @ScheduleName,
+                                @freq_type            = 1,
+                                @freq_interval        = 0,
+                                @freq_subday_type     = 0,
+                                @freq_subday_interval = 0,
+                                @active_start_date    = @StartDate_Int,
+                                @active_start_time    = @StartTime_Int;
+                        END
+                    END
+                END TRY
+                BEGIN CATCH
+                    EXEC [dbo].[USP_LogIntoAudit];
+                END CATCH
+
+                FETCH NEXT FROM upd_cursor INTO @ExamId, @EndTime;
+            END
+
+            CLOSE upd_cursor;
+            DEALLOCATE upd_cursor;
+        END
+    END
+
+    --  DELETE
+    ELSE IF NOT EXISTS (SELECT 1 FROM inserted) AND EXISTS (SELECT 1 FROM deleted)
+    BEGIN
+        DECLARE del_cursor CURSOR LOCAL FAST_FORWARD
+        FOR SELECT [ExamId] FROM deleted;
+
+        OPEN del_cursor;
+        FETCH NEXT FROM del_cursor INTO @ExamId;
+
+        WHILE @@FETCH_STATUS = 0
+        BEGIN
+            SET @JobName = 'AutoGrade_Exam_' + CAST(@ExamId AS NVARCHAR(20));
+
+            BEGIN TRY
+                IF EXISTS (
+                    SELECT 1 FROM msdb.dbo.sysjobs
+                    WHERE [name] = @JobName
+                )
+                BEGIN
+                    EXEC msdb.dbo.sp_delete_job
+                        @job_name = @JobName;
+                END
+            END TRY
+            BEGIN CATCH
+                EXEC [dbo].[USP_LogIntoAudit];
+            END CATCH
+
+            FETCH NEXT FROM del_cursor INTO @ExamId;
+        END
+
+        CLOSE del_cursor;
+        DEALLOCATE del_cursor;
+    END
+
+END;
+GO
