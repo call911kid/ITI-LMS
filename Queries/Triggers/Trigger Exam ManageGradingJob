@@ -96,7 +96,6 @@ BEGIN
     --  UPDATE:
     ELSE IF EXISTS (SELECT 1 FROM inserted) AND EXISTS (SELECT 1 FROM deleted)
     BEGIN
-        -- *** FIX 2: EXISTS check قبل فتح الـ cursor عشان ما نفتحش cursor فاضي ***
         IF EXISTS (
             SELECT 1
             FROM inserted i
