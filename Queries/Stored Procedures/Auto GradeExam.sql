@@ -63,7 +63,6 @@ BEGIN
           AND SE.[ExamStatus] = 'Pending'
           AND (@StudentId IS NULL OR SE.[StudentId] = @StudentId);
 
-        -- 5. ملخص النتائج
         SELECT
             SE.[StudentExamId],
             SE.[StudentId],
