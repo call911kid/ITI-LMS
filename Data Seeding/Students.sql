@@ -1,0 +1,40 @@
+-- .NET Track Intake 46 Minya Branch
+-- Universal Password: Student@ITI2026!
+
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Abdelsalam Ismaeil Abdelsalam Ismaeil', @Username = 'abdoAi1900', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Abdulrahman Mohamed', @Username = '3bdomo', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Ahmed Ashraf Bakr Mohamed', @Username = 'Ahmed-AshrafBakr', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Ahmed Hosny Salah', @Username = 'AhmedHosni19', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Amira Yehia Shehata', @Username = 'amiraYeh', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Amr Sobhi Saadawi', @Username = 'amral6ss', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Andrew Ibrahime Said', @Username = 'Androibrahim', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Asmaa Ibrahim Omar', @Username = 'AsmaaIbrahim-lab', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Doaa Ashraf Hassan', @Username = 'DoaaAshraf210', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Eslam Araby Abdo Mostafa', @Username = '3raBy', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Fady Sameh Gadhon', @Username = 'fadysameh2', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Fatma Ali Ahmed', @Username = 'FatmaAli111', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Hager Gamal Mohamed', @Username = 'HagerGamal83', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Hamdy Soliman Sabet Soliman', @Username = '77amdysoliman', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Hassan Ahmed Abdelaziem Teleb', @Username = 'hassanah391', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Hossam Ahmed Salama', @Username = 'HossSalama', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Mahmoud Saber Fangary Farghal', @Username = 'Mahmoud-Saber12', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Mena Magdy Ebied', @Username = 'MenaMagdyEbied', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Merna Sobhi Ghaly Kaiser', @Username = 'MernaSobhi', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Moataz Ahmed Shawky', @Username = 'aymansoltan', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Mohamed Abdelhady Abdellahi Mohamed', @Username = 'abdalhadydev', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Mohamed Abobakr Ibarhime Taha', @Username = 'moohamedam', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Mohamed Nasser Mayez', @Username = 'Mohamed-Mayez', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Mostafa Mohamed Mahmoud Ali', @Username = 'mostafamohamed-code', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Muhammad Abdeldayem Muhammad', @Username = 'mohamedabdeldayem7', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Mustafa Hassan Mustafa Abdullateef', @Username = 'call911kid', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Nourehan Hanea Aboelfetouh', @Username = 'nourehanhanea-collab', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Omar Kotb Abubakar', @Username = 'OmarKotb137', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Rania Raaef Roshdy Lbaib', @Username = 'raniaraaef', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Rawan Rabie Ibrahim', @Username = 'rawan-rabi3', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Reem Abdelkader Khalifa', @Username = 'ReemAbdelkader', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Remonda Nady Soliman', @Username = 'remonda7', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Romany Malak Kamel', @Username = 'RomanyMalak', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Salma Momen Fathy', @Username = 'salmamomen128-eng', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Sara Nadi Zayan', @Username = 'sarah-nadi', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Youssef Ahmed Hussein', @Username = 'youssefahmed-336', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
+EXEC [dbo].[USP_AddStudent] @StudentName = 'Shahd Mohamed Mohy El-Dien', @Username = 'Shahd-Mohy', @PlainPassword = 'Student@ITI2026!', @IntakeTrackId = 9;
